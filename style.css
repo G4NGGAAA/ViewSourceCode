@@ -1,0 +1,408 @@
+ :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --dark: #1e293b;
+            --darker: #0f172a;
+            --light: #f8fafc;
+            --lighter: #ffffff;
+            --gray: #94a3b8;
+            --gray-light: #e2e8f0;
+            --gray-dark: #475569;
+            --success: #10b981;
+            --error: #ef4444;
+            --warning: #f59e0b;
+            
+            --bg-color: #f1f5f9;
+            --text-color: #1e293b;
+            --card-bg: #ffffff;
+            --border-color: #e2e8f0;
+            --code-bg: #f8fafc;
+        }
+        
+        .dark-mode {
+            --bg-color: #0f172a;
+            --text-color: #f8fafc;
+            --card-bg: #1e293b;
+            --border-color: #334155;
+            --code-bg: #1e293b;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 2rem;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        
+        .header {
+            width: 100%;
+            max-width: 1200px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+        
+        .profile-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+        
+        .profile-image {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid var(--primary);
+            margin-bottom: 1rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+        
+        .profile-name {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--text-color);
+            margin-bottom: 0.5rem;
+        }
+        
+        .title {
+            font-size: 1.75rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+            color: var(--primary);
+            text-align: center;
+        }
+        
+        .theme-toggle {
+            background-color: var(--card-bg);
+            color: var(--text-color);
+            border: 1px solid var(--border-color);
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s;
+        }
+        
+        .theme-toggle:hover {
+            background-color: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+        
+        .main-container {
+            width: 100%;
+            max-width: 1200px;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .input-container {
+            width: 100%;
+            margin-bottom: 2rem;
+        }
+        
+        .url-input {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 1px solid var(--border-color);
+            border-radius: 0.5rem;
+            font-size: 1rem;
+            margin-bottom: 1rem;
+            background-color: var(--card-bg);
+            color: var(--text-color);
+            transition: border-color 0.3s;
+        }
+        
+        .url-input:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+        
+        .fetch-btn {
+            width: 100%;
+            padding: 0.75rem;
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 0.5rem;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+        
+        .fetch-btn:hover {
+            background-color: var(--primary-dark);
+        }
+        
+        .loading {
+            display: none;
+            text-align: center;
+            margin: 1rem 0;
+            color: var(--primary);
+        }
+        
+        .error {
+            color: var(--error);
+            text-align: center;
+            margin-bottom: 1rem;
+            display: none;
+        }
+        
+        .viewer-container {
+            display: flex;
+            width: 100%;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        
+        .file-tree {
+            width: 250px;
+            background-color: var(--card-bg);
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            padding: 1rem;
+            border: 1px solid var(--border-color);
+            overflow-y: auto;
+            max-height: 600px;
+            display: none;
+        }
+        
+        .file-tree-title {
+            font-weight: 600;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .file-list {
+            list-style: none;
+        }
+        
+        .file-item {
+            padding: 0.5rem;
+            border-radius: 0.25rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.25rem;
+            transition: background-color 0.2s;
+        }
+        
+        .file-item:hover {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .file-item.active {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .file-icon {
+            width: 20px;
+            text-align: center;
+        }
+        
+        .code-viewer {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            min-width: 0;
+        }
+        
+        .code-container {
+            width: 100%;
+            background-color: var(--card-bg);
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+            display: none;
+        }
+        
+        .code-header {
+            background-color: var(--darker);
+            color: white;
+            padding: 0.75rem 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .file-name {
+            font-family: monospace;
+            font-size: 0.875rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .code-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+        
+        .code-btn {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.375rem 0.75rem;
+            border-radius: 0.25rem;
+            cursor: pointer;
+            font-size: 0.875rem;
+            display: flex;
+            align-items: center;
+            gap: 0.375rem;
+            transition: background-color 0.2s;
+        }
+        
+        .code-btn:hover {
+            background-color: var(--primary-dark);
+        }
+        
+        .code-btn.copied {
+            background-color: var(--success);
+        }
+        
+        .code-content {
+            padding: 0;
+            background-color: var(--code-bg);
+            overflow-x: auto;
+            max-height: 600px;
+        }
+        
+        pre {
+            margin: 0;
+            padding: 1rem;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.875rem;
+            line-height: 1.5;
+            white-space: pre;
+            word-wrap: normal;
+            color: var(--text-color);
+            overflow-x: auto;
+        }
+        
+        .tab-container {
+            display: flex;
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 1rem;
+            display: none;
+        }
+        
+        .tab {
+            padding: 0.75rem 1.5rem;
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+            transition: all 0.2s;
+        }
+        
+        .tab.active {
+            border-bottom: 2px solid var(--primary);
+            color: var(--primary);
+            font-weight: 600;
+        }
+        
+        .tab:hover:not(.active) {
+            background-color: var(--gray-light);
+        }
+        
+        .empty-state {
+            text-align: center;
+            padding: 2rem;
+            color: var(--gray);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .empty-state i {
+            font-size: 3rem;
+            color: var(--gray);
+        }
+        
+        .stats {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            display: none;
+        }
+        
+        .stat-card {
+            flex: 1;
+            background-color: var(--card-bg);
+            border-radius: 0.5rem;
+            padding: 1rem;
+            border: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .stat-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+        
+        .stat-label {
+            font-size: 0.875rem;
+            color: var(--gray);
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 1rem;
+            }
+            
+            .header {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .profile-image {
+                width: 80px;
+                height: 80px;
+            }
+            
+            .title {
+                font-size: 1.5rem;
+                margin-bottom: 1rem;
+            }
+            
+            .viewer-container {
+                flex-direction: column;
+            }
+            
+            .file-tree {
+                width: 100%;
+                max-height: 200px;
+            }
+            
+            .code-content {
+                max-height: 400px;
+            }
+        }
